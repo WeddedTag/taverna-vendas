@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Taverna de Archavon - Gestão</title>
+    <link rel="stylesheet" href="style.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"></script>
+</head>
+<body>
+    <div class="container">
+        <div class="logo-area">
+            <img src="logo.png" alt="Logo Archavon">
+        </div>
+        
+        <div class="main-panel">
+            <div class="tabs">
+                <button class="tab active">VENDA OCULTA</button>
+                <button class="tab">TRIBUTO (REPASSE)</button>
+            </div>
+
+            <div class="content">
+                <div class="inputs">
+                    <div class="input-group">
+                        <label>ELIXIR DA SACIEDADE</label>
+                        <input type="number" id="qtd-elixir" value="0" min="0">
+                    </div>
+                    <div class="input-group">
+                        <label>ENSOPADO FORTIFICANTE</label>
+                        <input type="number" id="qtd-ensopado" value="0" min="0">
+                    </div>
+                    <div class="input-group">
+                        <label>SONO REANIMADOR</label>
+                        <input type="number" id="qtd-sono" value="0" min="0">
+                    </div>
+                    <div class="input-group">
+                        <label>LIMPEZA DA CABANA</label>
+                        <input type="number" id="qtd-limpeza" value="0" min="0">
+                    </div>
+                    
+                    <button class="btn btn-confirm" onclick="salvarVenda()">CONFIRMAR VENDA</button>
+                    <button class="btn btn-reset" onclick="zerarCampos()">ZERAR ATUAL</button>
+                </div>
+
+                <div class="results-section">
+                    <h3>RESULTADOS OCULTOS</h3>
+                    <div class="res-line">
+                        <span>Ouro Bruto:</span>
+                        <span id="bruto">R$ 0</span>
+                    </div>
+                    <div class="res-line">
+                        <span class="label-tributo">Tributo (20%):</span>
+                        <span id="repasse" class="val-red">R$ 0</span>
+                    </div>
+                    <div class="res-line">
+                        <span class="label-liquido">Ouro Líquido:</span>
+                        <span id="liquido" class="val-green">R$ 0</span>
+                    </div>
+                </div>
+            </div>
+
+            <button class="btn btn-pdf" onclick="gerarPDF()">📄 GERAR COMPROVANTE DO HISTÓRICO</button>
+            <div style="text-align: center; margin-top: 15px;">
+                <button class="btn-clear" onclick="limparHistorico()">🗑️ LIMPAR REGISTRO DE TURNO LOCAL</button>
+            </div>
+        </div>
+    </div>
+
+    <div id="pdf-area" style="display:none;">
+        <div id="pdf-content" style="padding: 50px; background: white; color: rgb(0, 0, 0); font-family: 'Times New Roman', serif;">
+            <h1 style="text-align: center; border-bottom: 2px solid #000000; padding-bottom: 10px;">RELATÓRIO DE VENDAS - ARCHAVON</h1>
+            <p><strong>Data de Emissão:</strong> <span id="pdf-data-relatorio"></span></p>
+            <table style="width: 100%; border-collapse: collapse; margin-top: 20px;">
+                <thead>
+                    <tr style="background: #f2f2f2;">
+                        <th style="border: 1px solid #000000; padding: 10px; text-align: left;">Data/Hora</th>
+                        <th style="border: 1px solid #000000; padding: 10px; text-align: left;">Itens Vendidos</th>
+                        <th style="border: 1px solid #000000; padding: 10px; text-align: right;">Valor Bruto</th>
+                    </tr>
+                </thead>
+                <tbody id="pdf-tabela"></tbody>
+            </table>
+            <h2 style="text-align: right; margin-top: 40px; border-top: 1px solid #000000; padding-top: 10px;">TOTAL ACUMULADO: <span id="pdf-total"></span></h2>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
